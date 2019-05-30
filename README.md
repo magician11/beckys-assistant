@@ -1,2 +1,3 @@
-# beckys-assistant
-Tools to process LaTex files
+# Beckys Assistant
+
+Tools to process LaTex files.
