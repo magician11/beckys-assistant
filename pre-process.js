@@ -46,6 +46,6 @@ if (process.argv.length < 3) {
 
   // save the file
   // console.log(text); // we are going printing out instead of saving result
-  // fs.writeFileSync(filename, text);
+  fs.writeFileSync(filename, text);
   console.log('All done!');
 }
