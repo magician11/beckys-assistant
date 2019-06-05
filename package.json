@@ -1,0 +1,22 @@
+{
+  "name": "beckys-assistant",
+  "version": "1.0.0",
+  "description": "Tools to process LaTex files.",
+  "main": "pre-process.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magician11/beckys-assistant.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/magician11/beckys-assistant/issues"
+  },
+  "homepage": "https://github.com/magician11/beckys-assistant#readme",
+  "dependencies": {
+    "escape-string-regexp": "^2.0.0"
+  }
+}
