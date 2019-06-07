@@ -6,6 +6,7 @@ const globalReplace = (text, changeFrom, changeTo) => {
   const updatedText = text.replace(
     new RegExp(escapeRegexp(changeFrom), 'g'),
     () => {
+      // console.log(escapeRegexp(changeFrom), changeFrom, changeTo);
       numberOfChanges++;
       return changeTo;
     }
@@ -45,20 +46,23 @@ if (process.argv.length < 3) {
   text = globalReplace(text, '1-D', '1D,');
   text = globalReplace(text, 'allow to', 'allow for');
   text = globalReplace(text, 'decision making', 'decision-making');
-  text = globalReplace(text, 'So ', 'Thus,');
+  text = globalReplace(text, 'So ', 'Thus, ');
   text = globalReplace(text, ' etc.', ', etc.');
   text = globalReplace(text, ' i.e. ', ' i.e., ');
+  text = globalReplace(text, ' (i.e. ', ' (i.e., ');
   text = globalReplace(text, ' e.g. ', ' e.g., ');
+  text = globalReplace(text, ' (e.g. ', ' (e.g., ');
   text = globalReplace(text, '\textit{a priori}', 'a priori,');
   text = globalReplace(text, '\textit{a posteriori}', 'a posteriori,');
   text = globalReplace(text, '\textit{a-posteriori}', 'a posteriori,');
   text = globalReplace(text, '\textit{a-priori}', 'a priori,');
   text = globalReplace(text, 'Also,', 'In addition,');
   text = globalReplace(text, 'Here ', 'Here, ');
-  text = globalReplace(text, 'Therefore', 'Therefore,');
-  text = globalReplace(text, 'Then', 'Then,');
+  text = globalReplace(text, 'Therefore ', 'Therefore,');
+  text = globalReplace(text, 'Then ', 'Then,');
+  text = globalReplace(text, 'data is', 'data are');
   text = globalReplace(text, 'First ', 'First,');
-  text = globalReplace(text, 'Thus', 'Thus,');
+  text = globalReplace(text, 'Thus ', 'Thus,');
   text = globalReplace(text, ', that', ' that');
   text = globalReplace(text, ', because', ' because,');
   text = globalReplace(text, 'Further,', 'Furthermore,');
@@ -80,7 +84,23 @@ if (process.argv.length < 3) {
   text = globalReplace(text, 'off-line', 'offline');
   text = globalReplace(text, 'dependant', 'dependent');
   text = globalReplace(text, 'Last,', 'Finally,');
+
+  // const result = text.match(/,,/g);
+  // console.log(result);
+
   text = globalReplace(text, ',,', ',');
+
+  //After every case the last letter of a word being followed by a single hyphen and then a capital letter, we should replace
+  //this with a lowercase letter being followed by a double dash
+
+  let numberOfChanges = 0;
+  text = text.replace(/(\s[A-Z][a-z]+)-([A-Z][a-z]+\s)/g, (match, p1, p2) => {
+    numberOfChanges++;
+    return `${p1}--${p2}`;
+  });
+  console.log(
+    `We made the special change with the hyphen ${numberOfChanges} times.`
+  );
 
   // if this is not a title, and the first letter of every word in this sentence is capitalised,
   // then lowercase everything but the first letter of the sentence.
